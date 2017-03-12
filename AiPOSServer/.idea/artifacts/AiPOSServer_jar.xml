@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="AiPOSServer:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/AiPOSServer_jar</output-path>
+    <root id="archive" name="AiPOSServer.jar">
+      <element id="module-output" name="AiPOSServer" />
+    </root>
+  </artifact>
+</component>
