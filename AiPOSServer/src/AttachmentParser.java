@@ -11,7 +11,6 @@ public class AttachmentParser {
     private String rcptAddress;
     private String sndrAddress;
     private String message;
-    private String contentType;
 
 
     public AttachmentParser(ServerSession serverSession){
@@ -43,9 +42,6 @@ public class AttachmentParser {
                     case ParserConstants.MIXED_TYPE:
                         boundary = serverSession.getRequest();
                         boundary = "--".concat(boundary.substring(ParserConstants.BOUNDARY.length() + 2, boundary.length() - 1));
-
-                     //   System.out.println("================================================================    " + boundary);
-
                         parseMessage(boundary);
                         parseAttachments(boundary);
                         return;
@@ -98,10 +94,14 @@ public class AttachmentParser {
 
     private void parseMessage(String boundary){
         String command;
+        String contentEncoding;
         message = "";
         while(true){
             command = serverSession.getRequest();
             if(command.startsWith(ParserConstants.CONTENT_TRANSFER_ENCODING)){
+                contentEncoding = command.substring(ParserConstants.CONTENT_TRANSFER_ENCODING.length(), command.length());
+                System.out.println("=======" + contentEncoding + "=======");
+
                 while (true){
                     command = serverSession.getRequest();
                     if(command != null) {
@@ -112,13 +112,15 @@ public class AttachmentParser {
                 break;
             }
         }
-/*
-        try {
-            message = new String(message.getBytes("Windows-1251"), "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+
+        if (ParserConstants.BASE64_ENCODING.equals(contentEncoding)){
+            try {
+                message = new String(Base64.getMimeDecoder().decode(message), "Windows-1251");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
         }
-*/
+
         AttachmentSaver.writeToFile(messageID, "message.txt", date + "\r\n" + sndrAddress + "\r\n" + message);
     }
 

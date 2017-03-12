@@ -15,8 +15,12 @@ public class ParserConstants {
     public static final String BOUNDARY = "boundary=";
     public static final String MIME_VERSION = "MIME-Version: ";
     public static final String CONTENT_DISPOSITION = "Content-Disposition: ";
-    public static final String MESSAGE_ENCODING = "Content-Transfer-Encoding: 7bit";
+
+    public static final String BIT7_ENCODING = "7bit";
+    public static final String BASE64_ENCODING = "base64";
 
     public static final String DEFAULT_BOUNDARY = ".";
+
+
 
 }
