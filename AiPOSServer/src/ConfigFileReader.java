@@ -6,7 +6,7 @@ public class ConfigFileReader {
     private static final String PORT = "Port: ";
     private static final String PATH = "Path: ";
     private static final String ENCODING = "Encoding: ";
-    private static final String CONFIG_PATH = "../config.txt";
+    private static final String CONFIG_PATH = "config.txt";
 
     private static String path;
     private static String encoding;

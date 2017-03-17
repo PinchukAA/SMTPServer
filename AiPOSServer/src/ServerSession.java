@@ -1,5 +1,3 @@
-import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
-import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility;
 
 import java.io.*;
 import java.net.Socket;
@@ -116,6 +114,7 @@ public class ServerSession implements Runnable{
                 case RequestConstants.QUIT:
                     request.executeQUIT();
                     logger.writeLogToFile(attachmentParser.getMessageID());
+                    logger.showMessage(attachmentParser.getMessageID());
                     running = false;
                     closeStreams();
                     break;
@@ -140,26 +139,6 @@ public class ServerSession implements Runnable{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
-    }
-
-    public String getQuotedRequest(){
-        try {
-     //       BufferedReader br = new BufferedReader(new InputStreamReader(MimeUtility.decode(socket.getInputStream(), "quoted-printable")));
-     //       String request = br.readLine();
-            String request = bufferedReader.readLine();
-     //       request = MimeUtility.decodeText(request, "");
-
-
-            logger.writeToLog("Message from client: " + request + "\r\n");
-            System.out.println(request);
-
-            return request;
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         return null;
     }
 

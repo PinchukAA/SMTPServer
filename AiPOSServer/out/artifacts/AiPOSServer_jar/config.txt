@@ -1,0 +1,3 @@
+Path: D:\Work - 2017\Messages\
+Encoding: UTF-8
+Port: 45658

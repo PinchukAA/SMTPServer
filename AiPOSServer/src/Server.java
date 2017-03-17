@@ -19,7 +19,6 @@ public class Server {
 
     public void startServer(){
         try {
-
             serverSocket = new ServerSocket(ConfigFileReader.getPort());
             running = true;
             while (running){
